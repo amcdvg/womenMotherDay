@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.6); /* Superposición translúcida */
+            z-index: -1;
+        }
+
+        .form-container {
+            background: #ffffff url('descarga.jpg') no-repeat center center;
+            background-size: cover; /* Cubre todo el contenedor manteniendo la proporción */
+            background-attachment: local; /* La imagen se desplaza con el contenido */
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            min-height: 500px; /* Altura mínima para asegurar espacio para la imagen */
+            z-index: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        
+
+        .form-container h2{
+            text-align: center;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+        }
+
+        
+        .titulo-azul {
+            color: blue;
+            text-align: center;
+            margin-bottom: 20px;
+            
+          }
+        /* Estilo para los inputs con error */
+        input.input-error {
+            border: 2px solid #f44336; /* Borde rojo */
+            background-color: #ffebee; /* Fondo rosado claro */
+            color: #f44336; /* Texto del mismo color que el borde */
+            border-radius: 4px; /* Bordes ligeramente redondeados */
+            padding: 8px; /* Espaciado interno */
+            outline: none; /* Remover el borde por defecto del navegador */
+           
+        }
+
+        input.input-error:focus {
+            border-color: #d32f2f; /* Cambiar color del borde al enfocar */
+            box-shadow: 0 0 5px rgba(244, 67, 54, 0.5); /* Añadir un ligero brillo */
+        }
+        .header-image {
+            width: 100%;
+            
+            padding: 10px;
+        }
+        .footer {
+            background-color: #333; /* Color de fondo */
+            color: white; /* Color del texto */
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .footer-img {
+            width: 100px; /* Ajusta el tamaño según necesites */
+            height: auto;
+            margin-bottom: 10px; /* Espacio entre la imagen y el texto */
+        }
+        .header-image1 {
+            background-color: rgb(52, 52, 171); /* Fondo azul */
+            width: 100%; /* Ocupa todo el ancho */
+            height: 150px; /* Ajusta la altura según necesites */
+            border-radius: 5px; /* Esquinas redondeadas */
+        }
+
+        .header-image img {
+            height: 20vh; /* Ocupará el 20% del alto de la pantalla */
+            width: auto;
+            max-width: 100%;
+            display: block;
+            margin: 30px auto 0 auto; /* 30px de espacio superior */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <!--h1 class="titulo-azul">Líderes Comuna Rio Otún</h1>
+        <h1 class="titulo-azul">MIRA</h1-->
+        <div class="header-image">
+
+            <img src="motherday.png">
+        
+        </div>
+
+        <br>
+
+
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="Nombre" placeholder="Escribe tu nombre" required>
+            </div>
+            <!--div class="form-group">
+                <label for="documento">Tipo de Documento</label>
+                <select id="documento" name="Tipo de Documento">
+                    <option value="">Selecciona un documento</option>
+                    <option value="TI">TI</option>
+                    <option value="CC">CC</option>
+                    
+                </select>
+                
+            </div-->
+            <div class="form-group">
+                
+                <label for="numero">Número de documento</label>
+                <input type="text" id="numero" name="Número de documento" placeholder="Escribe tu numero de documento" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="Teléfono" placeholder="Escribe tu teléfono" required>
+            </div>
+            <div class="form-group">
+                <label for="fecha-nacimiento">Fecha de nacimiento</label>
+                <input type="date" id="fecha-nacimiento" name="Fecha de nacimiento" required>
+            </div>
+            <!--div class="form-group">
+                <label for="edad">Edad</label>
+                <input type="text" id="edad" name="Edad" placeholder="Escribe tu edad" required>
+            </div-->
+            <div class="form-group">
+                <label for="mamá">¿Es mamá?</label>
+                <select id="mamá" name="¿Es mamá?">
+                    <option value="">Selecciona un documento</option>
+                    <option value="Sí">Si</option>
+                    <option value="No">No</option>
+                    
+                </select>
+                
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" name="Dirección" placeholder="Escribe tu dirección" required>
+            </div>
+            <div class="form-group">
+                <label for="barrio">Barrio</label>
+                <input type="text" id="barrio" name="Barrio" placeholder="Escribe tu barrio" required>
+            </div>
+            <div class="form-group">
+                <label for="comuna">Comuna</label>
+                <input type="text" id="comuna" name="Comuna" placeholder="Escribe tu comuna">
+            </div>
+            <!--div class="form-group">
+                <label for="horario">Horario de Congregación</label>
+                <select id="horario" name="Horario de Congregación">
+                    <option value="">Selecciona un horario</option>
+                    <option value="7:00 am">7:00 am</option>
+                    <option value="5:00 pm">5:00 pm</option>
+                    <option value="7:00 pm">7:00 pm</option>
+                </select>
+            </div-->
+            <div class="form-group">
+                <label for="observacion">Observación</label>
+                <textarea id="observacion" name="Observación" placeholder="Escribe tus observaciones"></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Enviar</button>
+        </form>
+
+        
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
