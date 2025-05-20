@@ -40,24 +40,24 @@ document.querySelector('.form-container form').addEventListener('submit', functi
     showLoadingSpinner();
     // Verifica si la cédula ya existe
     // Si la cédula no existe, muestra la rueda de carga y envía el formulario
-    showLoadingSpinner();
+    //showLoadingSpinner();
 
     // Conversión de datos del formulario a un objeto
-    const data = {};
-    formData.forEach((value, key) => {
-        data[key] = value;
-    });
+    //const data = {};
+    //formData.forEach((value, key) => {
+    //    data[key] = value;
+    //});
 
     // Envío de datos al servidor
-    sendDataToServer(data, form);
-    hideLoadingSpinner()
-    /*heckCedulaInServer(cedula)
+    //sendDataToServer(data, form);
+    //hideLoadingSpinner()
+    checkCedulaInServer(cedula)
         .then(exists => {
             console.log(exists)
             if (exists) {
                 // Si la cédula ya está registrada, muestra el mensaje de error y no envíes el formulario
                 
-                showCustomAlert('formulario no enviado.\n Por favor, verifica los datos. \n Cédula.', 'error');
+                showCustomAlert('formulario no enviado.\n Por favor, verifica los datos. \n Líder ya se encuentra \nregistrada.', 'error');
                 hideLoadingSpinner()
             } else {
                 // Si la cédula no existe, muestra la rueda de carga y envía el formulario
@@ -76,8 +76,9 @@ document.querySelector('.form-container form').addEventListener('submit', functi
         })
         .catch(() => {
             
-            showCustomAlert('Error al verificar la cédula. Inténtalo de nuevo.', 'error');
-        });*/
+            showCustomAlert('Error al verificar el registro. Inténtalo de nuevo.', 'error');
+            hideLoadingSpinner()
+        });
 });
 
 /**
@@ -86,7 +87,7 @@ document.querySelector('.form-container form').addEventListener('submit', functi
  * @param {HTMLFormElement} form - El formulario enviado.
  */
 function sendDataToServer(data, form) {
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzZ9JDzkhbnK2jtFsAz767rZteAxwXewHdeZ0FkfvYdO30R1eOVdERjZm7NyHM6wqBh/exec"//getScriptURL(data['Horario de Congregación']); // Determina la URL adecuada
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwT3wft18jX07aQaJq6Qt2cpv8qrQ4ew52JDrlEbZxQyrC3jTkkAhbYYvw9Jp-QDznz/exec"//getScriptURL(data['Horario de Congregación']); // Determina la URL adecuada
     console.log('Datos a enviar:', data);
     //const file = form.file.files[0];
     
@@ -117,7 +118,7 @@ function sendDataToServer(data, form) {
  * @returns {string} - URL correspondiente al horario.
  */
 function getScriptURL(horario) {
-    const urlBase = 'https://script.google.com/macros/s/AKfycbzLFQ-51wemO22hm7IsqZ-NtPtTxKI5vSNRvded796rlzHTbVqxWh0a30DKqKtgeQhx/exec';
+    const urlBase = 'https://script.google.com/macros/s/AKfycbwT3wft18jX07aQaJq6Qt2cpv8qrQ4ew52JDrlEbZxQyrC3jTkkAhbYYvw9Jp-QDznz/exec';
 
     //switch (horario) {
     //    case "7:00 am":
@@ -233,27 +234,33 @@ function showCustomAlert(message, type) {
 
 
 //////////////////////////////////////////////////////////////////////////
-document.querySelector('#cedula').addEventListener('blur', function () {
+document.querySelector('#numero').addEventListener('blur', function () {
     const cedula = this.value.trim();
-    console.log(cedula)
+    const inputElement = this; // Guardamos la referencia al input
+
+    console.log('Cédula ingresada:', cedula);
+
     if (!cedula) {
-        //showCustomAlert('Por favor ingresa una cédula.', 'error');
+        showCustomAlert('Por favor ingresa un número de documento.', 'error');
+        inputElement.classList.add('input-error');
         return;
+    } else {
+        inputElement.classList.remove('input-error');
     }
 
-    // Llama al servidor para validar la cédula
-    
+    // Llama al servidor para validar el número de documento
     checkCedulaInServer(cedula)
         .then(exists => {
             if (exists) {
-                showCustomAlert('La cédula del líder ya está registrado.\n Por favor, verifica tus datos.', 'error');
-                this.classList.add('input-error');
+                showCustomAlert('La líder ya está registrada.\n Por favor, verifica los datos.', 'error');
+                inputElement.classList.add('input-error');
             } else {
-                this.classList.remove('input-error');
+                inputElement.classList.remove('input-error');
             }
         })
         .catch(() => {
-            showCustomAlert('Error al verificar la cédula. Inténtalo de nuevo.', 'error');
+            showCustomAlert('Error al verificar el registro. Inténtalo de nuevo.', 'error');
+            inputElement.classList.add('input-error');
         });
 });
 
@@ -263,9 +270,9 @@ document.querySelector('#cedula').addEventListener('blur', function () {
  * @returns {Promise<boolean>} - True si la cédula existe, false si no.
  */
 function checkCedulaInServer(cedula) {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzLFQ-51wemO22hm7IsqZ-NtPtTxKI5vSNRvded796rlzHTbVqxWh0a30DKqKtgeQhx/exec'; // Reemplaza con tu URL de App Script
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwT3wft18jX07aQaJq6Qt2cpv8qrQ4ew52JDrlEbZxQyrC3jTkkAhbYYvw9Jp-QDznz/exec'; // Reemplaza con tu URL de App Script
     
-    return fetch(`${scriptURL}?cedula=${encodeURIComponent(cedula)}`)
+    return fetch(`${scriptURL}?Número%20de%20documento=${encodeURIComponent(cedula)}`)
         .then(response => response.json())
         .then(data => {
             if (data.result === 'success') {
